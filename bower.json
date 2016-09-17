@@ -1,0 +1,21 @@
+{
+  "name": "nodeexpress",
+  "description": "",
+  "main": "app.js",
+  "authors": [
+    "Ilhom Karimov <ilhom.uz@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.6.3"
+  }
+}
