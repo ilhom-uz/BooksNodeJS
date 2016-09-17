@@ -20,7 +20,8 @@ gulp.task('style', function() {
 gulp.task('inject', function() {
     var options = {
         bowerJson: require('./bower.json'),
-        directory: './public/lib'
+        directory: './public/lib',
+        ignorePath: '../../public'
     };
     return gulp.src('./src/views/*.html')
         .pipe(wiredep(options))
