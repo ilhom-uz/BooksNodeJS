@@ -8,10 +8,13 @@ var port = process.env.PORT || 5000;
 
 //Adding static files
 app.use(express.static(__dirname + '/public'));
-app.use(express.static(__dirname + '/ src/views'));
+
+//setting View engine for EJS
+app.set('views', './src/views');
+app.set('view engine', '.ejs');
 
 app.get('/', function(req, res) {
-    res.send('Hello world');
+    res.render('index', {title: 'Hello From render', list: ['BOOKS', 'ABOUT']});
 });
 
 app.listen(port, function(err) {
