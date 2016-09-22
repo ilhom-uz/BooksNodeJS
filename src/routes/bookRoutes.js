@@ -2,55 +2,46 @@ var express = require('express');
 
 //Adding Routing
 var bookRouter = express.Router();
+// MongoDB database client
+var mongodb = require('mongodb').MongoClient;
 
-//Temperary Books
-var books = [
-    {
-        title: 'War and Peace',
-        genre: 'Historical Fiction',
-        author: 'Lev Tolstoy'
-    },
-    {
-        title: 'Ruby on Rails',
-        genre: 'Programming',
-        author: 'Some Author'
-    },
-    {
-        title: 'Les Miserables',
-        genre: 'Historical Fiction',
-        author: 'Victor Hugo'
-    },
-    {
-        title: 'Les Miserables',
-        genre: 'Historical Fiction',
-        author: 'Victor Hugo'
-    },
-    {
-        title: 'The Dark World',
-        genre: 'Fantasy',
-        author: 'Henry Kuttner'
-    }
-];
+var router = function(nav) {
+    bookRouter.route('/')
+        .get(function(req, res) {
+            var url =
+                'mongodb://localhost:27017/libraryApp';
+            mongodb.connect(url, function(err, db) {
+                var collection = db.collection('books');
+                collection.find({}).toArray(function(err, results) {
+                    res.render('bookListView', {
+                        title: 'Hello From Books',
+                        nav: nav,
+                        books: results
+                    });
+                });
+            });
 
-bookRouter.route('/')
-    .get(function(req, res) {
-        res.render('bookListView', {
-            title: 'Hello From Books',
-            nav: [{Link: '/Books', Text: 'BOOKS'},
-                {Link: '/Authors', Text: 'AUTHORS'}],
-            books: books
         });
-    });
 
-bookRouter.route('/:id')
-    .get(function(req, res) {
-        var id = req.params.id;
-        res.render('bookView', {
-            title: 'Exact Book',
-            nav: [{Link: '/Books', Text: 'BOOKS'},
-                {Link: '/Authors', Text: 'AUTHORS'}],
-            book: books[id]
+    bookRouter.route('/:id')
+        .get(function(req, res) {
+            var id = req.params.id;
+            var url =
+                'mongodb://localhost:27017/libraryApp';
+            mongodb.connect(url, function(err, db) {
+                var collection = db.collection('books');
+                collection.find({}).toArray(function(err, results) {
+                    res.render('bookListView', {
+                        title: 'Hello From Books',
+                        nav: nav,
+                        books: results
+                    });
+                });
+            });
+
         });
-    });
 
-module.exports = bookRouter;
+    return bookRouter;
+};
+
+module.exports = router;
