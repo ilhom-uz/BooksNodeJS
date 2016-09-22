@@ -4,7 +4,7 @@ var express = require('express');
 var app = express();
 
 //server port
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || 3000;
 
 //Adding static files
 app.use(express.static(__dirname + '/public'));
